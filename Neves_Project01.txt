@@ -1,0 +1,88 @@
+Jessica Neves
+02/22/16
+CSC 201
+Lab 01
+
+Section 2.2 - Report 1
+Building a Right Triangle/Half Pyramid
+ Variables:
+   - building_block: a user inputted value of a string type, used to build a right triangle with
+   - level: a user inputted value of integer type, used to create the base and height of the triangle
+   - number_blocks: This variable is used as the 'stop' in the range. It is equal to 'level' + 1, so the range stops at the correct value
+   
+   In this program for building a right triangle, the user is able to input values to make their triangle how they want. I used a for loop to iterate on the values from 1 to number_blocks. I could then multiply each of those values in the loop by whichever character the user chose to make their right triangle with.
+   As the program runs, any characters the user types as the building block is counted as 1 block. Therefore, a building block of more than one character will not produce a perfect looking triangle. However, the triangle is built with the appropriate amount of building blocks repeated in each row.
+
+Section 2.3 - Report 2
+Building a Full/Centered Pyramid
+ Variables:
+   - building_block: a user inputted value of a string type, used to build the pyramid with
+   - level: a user inputted value of integer type, used to create the height, base, and spacing of the pyramid
+   - number_blocks: This value is equal to 'level'*2. It is used to create the base of the pyramid, and is set as the 'stop' value in the range of the for loop used.
+   - space: This is not a completely necessary variable, but I used it in place of using quotations throughout the code. It is equal to " ".
+   - top_fill: This variable is equal to 'level'-1. It is used to fill space around the sides of the pyramid to give it the correct shape. It is decremented in the for loop.
+
+   Where the first program used multiplication to repeat characters in a pattern to produce a shape, this program applied the multiplication to a space (" ") in a particular pattern to create a centered pyramid. It was fairly simple, mathematically, to produce. I started by thinking from the base to the top. In order for the pyramid to be centered correctly, each row needed to have an odd number of building blocks repeated. I realized I could multiply the user's chosen value ('level') by 2 and subtract 1 to give me the entire size of the pyramid, including the surrounding spaces. I could have used that value as a variable, but chose not to. I only really needed to use it as a reference to double check my math while creating the spacing around the pyramid. 
+   Using a for loop, with a range of 1 to number_blocks. The range would stop on an odd number every time. I also had to set the 'step' to 2, so that I would have odd values returned. 
+   The spacing or padding around each level was the key to making this pyramid centered. Using the value I calculated, 'level'*2 - 1, I started at the top of the pyramid and subtracted the one block at the top to give me an even value. This even value could then be divided by 2, and was equal to 'level' - 1. I called this variable top_fill, because when multiplied by my space variable and concatenated on either side of the building block, it filled the space around the top of the pyramid. In my for loop I decremented this value so that in each consecutive row two spaces would be removed while my building blocks increased by 2, due to the 'step' in the range.
+
+   In the first part of this program, I ignored the fact that a building_block can be more than one character long. Therefore, if the user were to type a building block of 2 or more characters, the pyramid would no longer be centered. To account for this flaw, I adjusted my 'space' variable to be " "*len(building_block), where len() returns the number of characters the user typed as their building block. This would then adjust the spacing appropriately to keep it centered. Just as with the right triangle with more than one character the pyramid no longer appears perfectly shaped with a single point at the top, but the same holds true that the building_block is still be repeated the correct amount of times.
+
+Section 3.1
+Display a Parabola
+ Variables:
+   - x_range: This is a user inputted value of integer type. It stores the original given value.
+   - x: This variable is equal to x_range. x is the variable that is used to define the range in the for loop, as well as the starting value for in the equation for the parabola.
+   - y: This variable is an integer type equal to our equation (x^2)/4. It must be converted to an integer type so that it can be properly multiplied by strings.
+   - plot_point: This variable is a string type. It is equal to "."
+   - space: This is another string type variable used in place of " ".
+
+   This program was a bit more difficult to figure out. It posed the challenges of figuring out how to square a number, as well as understanding how range() functions. Before this program I was not entirely familiar with how it was working. After solving this program, I now have a much clearer understanding of it. I started by evaluating my values of y in a for loop in range(-15, 15) as the figure in the lab handout describes. I decremented x in order to reach the values at the positive and negative end of the range. I originally assumed that the range represented the values of x that would be evaluated in the equation. I eventually learned that the range actually evaluates any values of x over the distance of -15 to positive 15 in this case. Only by decrementing x could I reach the negative values. This was also assuming the user input a positive value. I later went back and created an if statement to make sure my values were always going in the same direction.
+
+   In the for loop I set my range between -x and x+1. I had to first make sure my values of y were correctly decreasing and increasing exponentially. Once I was satisfied with my y values I multiplied y by space then concatenated with a plot point to create the sideways parabola.
+  
+Section 3.2
+ Variables:
+   - abs_value: This is a user inputted value of integer type. In creating the parabola, I found it was safer to use the absolute value, than attempt to account for negative values and using different for loops. I created an if statement to correct abs_value if the user entered a negative value.
+   - x: Stores the value of abs_value. x is the variable used later on in the equations in the for loops.
+   - scale: This is set initially as " ", but is used in a while loop with if statements to determine if the user wants a 'wide' or 'narrow' parabola.
+   - operator: This variable is set conditionally, depending on the user's input for 'scale'. if 'wide' the operator is '/', if 'narrow' the operator is '*'.
+   - factor: This is a user inputted value of integer type to determine how wide or narrow the parabola should be.
+   - scaling_factor: This value is set conditionally, depending on the operator. if '/' 'scaling_factor' was 1/'factor'. if '*' 'scaling_factor' was 1*factor. Doing the calculations in this manner made it easier to create the equation for the parabola.
+   - plot_point: This was a string type variable "*". Any point could have worked.
+   - space: This was a string type variable to take the place of " ".
+   - new_line: This variable was a string type to take the place of "\n" which creates a new line.
+   - curve: This is a counter variable, initially set equal to 0. It starts at 0 at the top of the parabola and is incremented to shape the parabola appropriately. It is multiplied by 'space' so that the parabola curves inwards as it should.
+   - inner_space: This variable is set to (x*2)-1. It is multiplied by space and concatenated between the plot points for each value. It is then decremented by 2 to create the correct tapering effect between the points.
+   - y_int: This is a variable of integer type. It is equal to the value of the parabola equation converted to an integer for multiplication purposes.
+   - y_values: This is a variable of integer type. It is the true value of y, not converted to an integer, and I used it in a series of if statements to be more accurate. 
+   - y: This is a variable of integer type, used in an if statement to store the last value of y_int. In this particular if statement within the for loop, y_int is reassigned and combined with 'y' with each iteration.
+
+   The right side up parabola was slightly easier to form since I finally understood how range functioned and how to code some of the more obscure math operations. This code begins with the user inputting a number which is then translated to the absolute value if it is negative. I then referenced our textbook to remember how to properly form a while loop with user input. The user is able to choose 'wide' or 'narrow' as a parabola size. Some if statements after the while loop assign the operator value accordingly. The user then enters another integer value to be used as the scaling factor. I called the value itself 'factor'. Made sure it was positive so avoid having to figure out how to translate the parabola across the x-axis. This was fixed with an if statement similar to the absolute value at the beginning. Another set of if statements evaluating the operator created the scaling factor which would either calculate 1/'factor' or 1*'factor'. It was helpful to do the calculations this way, especially for division, so that when making the equation all I had to do was multiply everything by the 'scaling_factor'.
+
+   I set my plot_point and space again. I also set 'new_line' as "\n" which creates a line break. Curve would increment the outer spacing/padding of the graph along the margin/y-axis. inner_space would give me an odd numbered value to center my parabola similarly to the pyramid.
+   
+   The workings of the for loop start with the range. In this program my range only went halfway, decrementing from x to -1 so it would stop at 0. I evaluated y_int for integer values and y_values for the decimals. I found using 'y_values' in my if statments made them more accurate. The parabola would form from the top, downwards. The point at the top would be against the margin of the console window, with the appropriately calculated 'inner_space' concatenated between a second plot point. The loop continues with 'curve' incrementing so that the parabola curves in, and inner_space decrementing so it tapers in the middle.
+   
+   To get the appropriate spacing between the points I used y set equal to my initial y_int value. I reassigned y_int in the for loop so that I would get the difference between the new y value and the previously plotted point with each iteration. That value multiplied by 'new_line' gave me fairly accurate spacing between the points along the y-axis. When y was evauated for equality to 0, I printed one point in the middle of the parabola. Below that I coded a series of tick marks to represent my x-axis, with 0 printed under that in the middle to show where the y-axis is.
+
+   The challenge of this program was figuring out how to space the points along the y-axis as accurately as possible. Still, a limitation to this program is that the spacing is not perfect, since decimals can not be multiplied. I attempted adding a third if statement to account for values of y between 1 and 0. These should print closer to the x-axis, instead they are plotted each one full line above eachother. Otherwise, this is a very neat program to play with.
+
+Section 3.3 
+Build a Circle
+ Variables:
+   - radius: This is a user inputted value of integer type, used as the radius of the circle
+   - plot_point: A string type variable for "." Any point can be used to make a circle with.
+   - space: A string type variable to replace " ".
+   - x_max: An integer type variable set equal to 'radius', stores the highest value x can be
+   - pi: An integer type variable set equal to 3.14159265
+   - y_int: An integer type variable set equal to (x^2)/pi
+   - y_max: An integer type variable to evaluate (x^2)/pi when x = x_max
+
+   This program was the most challenging in this project. Most of the code I was able to use from other parts of the project. The equation used for the circle was similar to that used for the parabola. I decided the easiest way to solve this would be to display the rotated parabola and adjust the spacing between the points to make it appear as a circle.
+
+   I recycled the for loop I used for my parabola. I added y_max, which was the y value when x was equal to the radius. I used if-elif-else statements to adjust my spacing conditionally, based on if y_int equalled 0 or y_max.
+
+  I found myself getting distracted with the goal of trying to make a perfect circle. This is a near impossible task to do. There are many limitations, similar to displaying the parabola. Spacing is one major issue, especially for the smaller circles. As the circles get larger, the issue becomes the exponential growth of the parabola. They start to take on a more oblong/oval shape.
+
+   Overall, this project was very challenging and had me thinking outside the box a lot of the time. My code is by no means perfect. One of the biggest issues I have is an error if a user enters a data type other than what the input was being converted to, for example a string type when the input is being converted to integer. It was a relief to understand how range() operates now. While working through the project this was frustrating, as was finding out how to exponentiate. Knowing all of this now will be very helpful for the next assignment. 
